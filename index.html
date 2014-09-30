@@ -6,14 +6,16 @@
 </head>
 <body>
     <canvas id="canvas" width="100" height="100" style="width: 400px; height: 400px;"></canvas>
+    <img id="image" src="sample.jpg" style="display: none"/>
 
     <script type="text/javascript">
         var canvas = document.getElementById("canvas");
+        var image = document.getElementById("image");
 
         var flow = new Envy.EditorFlow();
-        flow.addNode(new Envy.Nodes.NoiseInputNode({width: 100, height: 100, seed: 10}));
-        flow.addNode(new Envy.Nodes.GrayscaleTransformNode());
+        flow.addNode(new Envy.Nodes.ImageInputNode(image));
         flow.addNode(new Envy.Nodes.ThresholdTransformNode());
+        flow.addNode(new Envy.Nodes.GrayscaleTransformNode());
         flow.addNode(new Envy.Nodes.CanvasOutputNode(canvas)).render();
     </script>
 </body>
