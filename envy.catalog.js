@@ -23,6 +23,7 @@
   scriptLoader("scripts/nodes/transform/envy.nodes.grayscale.js");
   scriptLoader("scripts/nodes/transform/envy.nodes.threshold.js");
   scriptLoader("scripts/nodes/transform/envy.nodes.colorkey.js");
+  scriptLoader("scripts/nodes/transform/envy.nodes.channelbitdepth.js");
   scriptLoader("scripts/nodes/output/envy.nodes.canvas.js");
 
   scriptLoader("scripts/envy.editorflow.js");

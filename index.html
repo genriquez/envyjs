@@ -14,11 +14,17 @@
 
         var flow = new Envy.EditorFlow();
         flow.addNode(new Envy.Nodes.ImageInputNode(image));
+
         //flow.addNode(new Envy.Nodes.ThresholdTransformNode());
+
         //flow.addNode(new Envy.Nodes.GrayscaleTransformNode());
-        var colorKey = flow.addNode(new Envy.Nodes.ColorKeyTransformNode())
+
+        /*var colorKey = flow.addNode(new Envy.Nodes.ColorKeyTransformNode())
         colorKey._colorKey = new Envy.Color(132,176,214);
-        colorKey._tolerance = 53;
+        colorKey._tolerance = 53;*/
+
+        flow.addNode(new Envy.Nodes.ChannelBitDepthTransformNode());
+
         flow.addNode(new Envy.Nodes.CanvasOutputNode(canvas)).render();
     </script>
 </body>
