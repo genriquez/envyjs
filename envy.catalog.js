@@ -14,6 +14,7 @@
   scriptLoader("scripts/envy.utils.js");
   scriptLoader("scripts/envy.providers.js");
   scriptLoader("scripts/envy.random.js");
+  scriptLoader("scripts/envy.color.js");
 
   scriptLoader("scripts/nodes/envy.node.js");
   scriptLoader("scripts/nodes/envy.imagenode.js");
@@ -21,6 +22,7 @@
   scriptLoader("scripts/nodes/input/envy.nodes.image.js");
   scriptLoader("scripts/nodes/transform/envy.nodes.grayscale.js");
   scriptLoader("scripts/nodes/transform/envy.nodes.threshold.js");
+  scriptLoader("scripts/nodes/transform/envy.nodes.colorkey.js");
   scriptLoader("scripts/nodes/output/envy.nodes.canvas.js");
 
   scriptLoader("scripts/envy.editorflow.js");
