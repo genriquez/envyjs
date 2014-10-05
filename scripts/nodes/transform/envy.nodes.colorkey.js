@@ -47,6 +47,26 @@
 
         return targetImageData;
     };
+    
+    /**
+     * Sets the maximum color distance to match the color key with
+     * @param {Number} tolerance Max. color distance
+     */
+    ColorKeyTransformNode.prototype.setTolerance = function (tolerance) {
+        this._tolerance = tolerance;
+        this.setDirty();
+    };
+    
+    /**
+     * Sets the color key to match pixel colors to
+     * @param {Number} r Red channel value of the color to match
+     * @param {Number} g Green channel value of the color to match
+     * @param {Number} b Blue channel value of the color to match
+     */
+    ColorKeyTransformNode.prototype.setColorKey = function (r, g, b) {
+        this._colorKey = new Envy.Color(r, g, b);
+        this.setDirty();
+    };
 
     // Export class
     Envy.Nodes.ColorKeyTransformNode = ColorKeyTransformNode;

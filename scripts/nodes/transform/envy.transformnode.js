@@ -21,6 +21,17 @@
      */
     TransformNode.prototype._cachedOutput = null;
     
+    TransformNode.prototype._passThrough = false;
+    
+    /**
+     * Sets if the node should apply the transform or just pass through the source image data
+     * @param {Boolean} passThrough Pass through node transform
+     */
+    TransformNode.prototype.setPassThrough = function (passThrough) {
+        this._passThrough = passThrough;
+        this.setDirty();
+    };
+    
     /**
      * Sets the source node for the current transform node, and sets the current node as dirty
      * @param {Envy.ImageNode} node New source node
@@ -48,7 +59,9 @@
      * @returns {ImageData} Transformed Image data
      */
     TransformNode.prototype.render = function () {
-        if (!this._cachedOutput) {
+        if (this._passThrough) {
+            return this._source.render();
+        } else if (!this._cachedOutput) {
             var sourceImageData = this._source.render();
             this._cachedOutput = this._transform(sourceImageData);
         }

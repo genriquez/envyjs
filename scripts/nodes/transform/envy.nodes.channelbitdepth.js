@@ -38,6 +38,15 @@
 
         return targetImageData;
     };
+    
+    /**
+     * Bit depth to map the image to
+     * @param {Number} bitDepth Bit depth
+     */
+    ChannelBitDepthTransformNode.prototype.setBitDepth = function (bitDepth) {
+        this._bitDepth = bitDepth;
+        this.setDirty();
+    };
 
     // Export class
     Envy.Nodes.ChannelBitDepthTransformNode = ChannelBitDepthTransformNode;

@@ -24,7 +24,7 @@
         for (i = 0; i < sourceImageData.data.length; i += 4) {
             var grayLevel = (sourceImageData.data[i] + sourceImageData.data[i + 1] + sourceImageData.data[i + 2]) / 3;
             filteredImageData.data[i] = filteredImageData.data[i + 1] = filteredImageData.data[i + 2] = Math.floor(grayLevel);
-            filteredImageData.data[i + 3] = 255;
+            filteredImageData.data[i + 3] = sourceImageData.data[i + 3];
         }
 
         return filteredImageData;
