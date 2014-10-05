@@ -9,23 +9,25 @@
     <img id="image" src="sample.jpg" style="display: none"/>
 
     <script type="text/javascript">
-        var canvas = document.getElementById("canvas");
-        var image = document.getElementById("image");
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var canvas = document.getElementById("canvas");
+            var image = document.getElementById("image");
 
-        var flow = new Envy.EditorFlow();
-        flow.addNode(new Envy.Nodes.ImageInputNode(image));
+            var flow = new Envy.EditorFlow();
+            flow.addNode(new Envy.Nodes.ImageInputNode(image));
 
-        //flow.addNode(new Envy.Nodes.ThresholdTransformNode());
+            flow.addNode(new Envy.Nodes.ThresholdTransformNode());
 
-        //flow.addNode(new Envy.Nodes.GrayscaleTransformNode());
+            flow.addNode(new Envy.Nodes.GrayscaleTransformNode());
 
-        /*var colorKey = flow.addNode(new Envy.Nodes.ColorKeyTransformNode())
-        colorKey._colorKey = new Envy.Color(132,176,214);
-        colorKey._tolerance = 53;*/
+            var colorKey = flow.addNode(new Envy.Nodes.ColorKeyTransformNode())
+            colorKey._colorKey = new Envy.Color(255,255,255);
+            colorKey._tolerance = 0;
 
-        flow.addNode(new Envy.Nodes.ChannelBitDepthTransformNode());
+            flow.addNode(new Envy.Nodes.ChannelBitDepthTransformNode());
 
-        flow.addNode(new Envy.Nodes.CanvasOutputNode(canvas)).render();
+            flow.addNode(new Envy.Nodes.CanvasOutputNode(canvas)).render();
+        });
     </script>
 </body>
 </html>

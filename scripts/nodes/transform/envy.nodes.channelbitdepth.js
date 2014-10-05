@@ -1,49 +1,44 @@
+/*global Envy: false */
+/*jslint nomen: true, plusplus: true, vars: true */
+
 (function (Envy, context) {
-  "use strict";
+    "use strict";
 
-  var ChannelBitDepthTransformNode = function () {
-    this.init();
-  };
+    /**
+     * Transform node that emulates a specific bit depth per channel (RGBA)
+     */
+    var ChannelBitDepthTransformNode = function () {
+        this.init();
+    };
 
-  // Base node inheritance
-  ChannelBitDepthTransformNode.prototype = new Envy.Nodes.ImageNode();
+    ChannelBitDepthTransformNode.prototype = new Envy.Nodes.TransformNode();
 
-  ChannelBitDepthTransformNode.prototype._source = null;
+    /**
+     * Threhold level to evaluate the input image with
+     */
+    ChannelBitDepthTransformNode.prototype._bitDepth = 6;
 
-  /// <summary>Threhold level to evaluate the input image with</summary>
-  ChannelBitDepthTransformNode.prototype._bitDepth = 6;
+    /**
+     * Creates a new Image data based on the sorce output, emulating a specific bit depth per channel (RGBA)
+     * @returns {ImageData} Transformed image data
+     */
+    ChannelBitDepthTransformNode.prototype._transform = function (sourceImageData) {
+        var targetImageData = this._createImageData(sourceImageData);
+        var i = 0;
 
-  ChannelBitDepthTransformNode.prototype.setSource = function (node) {
-    /// <summary>Sets the source node to transform</summary>
-    /// <param name="node" type="Node">New source node to transform</param>
+        var currentBitDepthMaxValue = 255;
+        var targetBitDepthMaxValue = Math.pow(2, this._bitDepth) - 1;
 
-    if (this._source) {
-      // Remove old source dependency
-      this.removeDependency(this._source);
-    }
+        for (i = 0; i < sourceImageData.data.length; i++) {
+            var sourceValue = sourceImageData.data[i];
+            sourceValue = Math.round(sourceValue * targetBitDepthMaxValue / currentBitDepthMaxValue) * currentBitDepthMaxValue / targetBitDepthMaxValue;
 
-    this.addDependency(node);
-    this._source = node;
-    this.setDirty();
-  };
+            targetImageData.data[i] = sourceValue;
+        }
 
-  ChannelBitDepthTransformNode.prototype.render = function () {
-    var sourceImageData = this._source.render();
-    var targetImageData = Envy.Providers.ImageDataFactory.createImageData(sourceImageData.width, sourceImageData.height);
+        return targetImageData;
+    };
 
-    var currentBitDepthMaxValue = 255;
-    var targetBitDepthMaxValue = Math.pow(2, this._bitDepth) - 1;
-
-    for (var i = 0; i < sourceImageData.data.length; i++) {
-      var sourceValue = sourceImageData.data[i];
-      sourceValue = Math.round(sourceValue * targetBitDepthMaxValue / currentBitDepthMaxValue) * currentBitDepthMaxValue / targetBitDepthMaxValue;
-
-      targetImageData.data[i] = sourceValue;
-    }
-
-    return targetImageData;
-  };
-
-  // Export class
-  Envy.Nodes.ChannelBitDepthTransformNode = ChannelBitDepthTransformNode;
+    // Export class
+    Envy.Nodes.ChannelBitDepthTransformNode = ChannelBitDepthTransformNode;
 }(Envy, this));

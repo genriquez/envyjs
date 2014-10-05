@@ -1,11 +1,14 @@
+/*global Envy: false */
+/*jslint nomen: true, plusplus: true */
+
 (function (Envy, context) {
-  "use strict";
+    "use strict";
 
-  var ImageNode = function () { };
+    var ImageNode = function () { };
 
-  // Node base class inheritance
-  ImageNode.prototype = new Envy.Nodes.Node();
+    // Node base class inheritance
+    ImageNode.prototype = new Envy.Nodes.Node();
 
-  // Export
-  Envy.Nodes.ImageNode = ImageNode;
+    // Export
+    Envy.Nodes.ImageNode = ImageNode;
 }(Envy, this));

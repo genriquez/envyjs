@@ -1,34 +1,51 @@
+/*global Envy: false */
+/*jslint nomen: true, plusplus: true, vars: true */
+
 (function (Envy, context) {
-  "use strict";
+    "use strict";
 
-  var NoiseInputNode = function (configuration) {
-    this.extend(configuration, "_");
-    this.init();
-  };
+    /**
+     * Input node to export random RGB colors image data
+     * @param {Object} configuration Configuration set for the node
+     */
+    var NoiseInputNode = function (configuration) {
+        this.extend(configuration, "_");
+        this.init();
+    };
 
-  // Node base class inheritance
-  NoiseInputNode.prototype = new Envy.Nodes.Node();
+    NoiseInputNode.prototype = new Envy.Nodes.Node();
 
-  /// <summary>Seed for random data generation</summary>
-  NoiseInputNode.prototype._seed = 0;
+    /**
+     * Seed for random data generation
+     */
+    NoiseInputNode.prototype._seed = 0;
 
-  /// <summary>Width of the image to generate</summary>
-  NoiseInputNode.prototype._width = 100;
+    /**
+     * Width of the image to generate
+     */
+    NoiseInputNode.prototype._width = 100;
 
-  /// <summary>Height of the image to generate</summary>
-  NoiseInputNode.prototype._height = 100;
+    /**
+     * Height of the image to generate
+     */
+    NoiseInputNode.prototype._height = 100;
 
-  NoiseInputNode.prototype.render = function() {
-    var imageData = Envy.Providers.ImageDataFactory.createImageData(this._width, this._height);
-    var random = new Envy.Random(this._seed);
+    /**
+     * Exports an image data object with random RGB vales
+     * @returns {ImageData} Random RGB image data
+     */
+    NoiseInputNode.prototype.render = function () {
+        var imageData = Envy.Providers.ImageDataFactory.createImageData(this._width, this._height),
+            random = new Envy.Random(this._seed),
+            i = 0;
 
-    for (var i = 0; i < imageData.data.length; i++) {
-      imageData.data[i] = (i+1) % 4 ? random.nextInteger(256) : 255;
-    }
+        for (i = 0; i < imageData.data.length; i++) {
+            imageData.data[i] = (i + 1) % 4 ? random.nextInteger(256) : 255;
+        }
 
-    return imageData;
-  };
+        return imageData;
+    };
 
-  // Export class
-  Envy.Nodes.NoiseInputNode = NoiseInputNode;
+    // Export class
+    Envy.Nodes.NoiseInputNode = NoiseInputNode;
 }(Envy, this));

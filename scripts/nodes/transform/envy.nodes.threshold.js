@@ -1,43 +1,47 @@
+/*global Envy: false */
+/*jslint nomen: true, plusplus: true, vars: true */
+
 (function (Envy, context) {
-  "use strict";
+    "use strict";
 
-  var ThresholdTransformNode = function () {
-    this.init();
-  };
+    /**
+     * Transform node that rounds RGBA channel values to min or max values, comparing it by a base level
+     */
+    var ThresholdTransformNode = function () {
+        this.init();
+    };
 
-  // Base node inheritance
-  ThresholdTransformNode.prototype = new Envy.Nodes.ImageNode();
+    ThresholdTransformNode.prototype = new Envy.Nodes.TransformNode();
 
-  ThresholdTransformNode.prototype._source = null;
+    /**
+     * Threhold level to evaluate the input image with
+     */
+    ThresholdTransformNode.prototype._level = 128;
 
-  /// <summary>Threhold level to evaluate the input image with</summary>
-  ThresholdTransformNode.prototype._level = 128;
+    /**
+     * Sets the threshold level for the current node
+     * @param {Number} level Threshold level
+     */
+    ThresholdTransformNode.prototype.setLevel = function (level) {
+        this._level = level;
+        this.setDirty();
+    };
+    
+    /**
+     * Rounds RGBA channel values to min or max values, comparing it to a base level
+     * @returns {ImageData} Transformed Image data
+     */
+    ThresholdTransformNode.prototype._transform = function (sourceImageData) {
+        var targetImageData = this._createImageData(sourceImageData);
+        var i = 0;
 
-  ThresholdTransformNode.prototype.setSource = function (node) {
-    /// <summary>Sets the source node to transform</summary>
-    /// <param name="node" type="Node">New source node to transform</param>
+        for (i = 0; i < sourceImageData.data.length; i++) {
+            targetImageData.data[i] = sourceImageData.data[i] > this._level ? 255 : 0;
+        }
 
-    if (this._source) {
-      // Remove old source dependency
-      this.removeDependency(this._source);
-    }
+        return targetImageData;
+    };
 
-    this.addDependency(node);
-    this._source = node;
-    this.setDirty();
-  };
-
-  ThresholdTransformNode.prototype.render = function () {
-    var sourceImageData = this._source.render();
-    var targetImageData = Envy.Providers.ImageDataFactory.createImageData(sourceImageData.width, sourceImageData.height);
-
-    for (var i = 0; i < sourceImageData.data.length; i++) {
-      targetImageData.data[i] = sourceImageData.data[i] > this._level ? 255 : 0;
-    }
-
-    return targetImageData;
-  };
-
-  // Export class
-  Envy.Nodes.ThresholdTransformNode = ThresholdTransformNode;
+    // Export class
+    Envy.Nodes.ThresholdTransformNode = ThresholdTransformNode;
 }(Envy, this));
