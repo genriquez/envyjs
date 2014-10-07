@@ -6,12 +6,27 @@
     /**
      * Node flow builder
      */
-    var EditorFlow = function () { };
+    var EditorFlow = function () {
+        this._branchRootStack = [];
+    };
 
     /**
      * Last added node to the current flow
      */
     EditorFlow.prototype._currentNode = null;
+    
+    EditorFlow.prototype._branchRootStack = null;
+
+    EditorFlow.prototype.branch = function () {
+        this._branchRootStack.push(this._currentNode);
+    };
+
+    EditorFlow.prototype.endBranch = function () {
+        var node = this._currentNode;
+        this._currentNode = this._branchRootStack.pop();
+        
+        return node;
+    };
 
     EditorFlow.prototype.addNode = function (node) {
         if (this._currentNode) {

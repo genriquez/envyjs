@@ -59,6 +59,8 @@
      * @returns {ImageData} Transformed Image data
      */
     TransformNode.prototype.render = function () {
+        this._dirty = false;
+        
         if (this._passThrough) {
             return this._source.render();
         } else if (!this._cachedOutput) {

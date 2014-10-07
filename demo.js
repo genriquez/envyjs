@@ -27,8 +27,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     };
     
     Demo.addNode(new Envy.Nodes.ImageInputNode(Demo.image));
+    
+    Demo.flow.branch();
 
-    Demo.addNode(new Envy.Nodes.ChannelBitDepthTransformNode(), function (node) {
+    /*Demo.addNode(new Envy.Nodes.ChannelBitDepthTransformNode(), function (node) {
         node.setBitDepth(4);
         
         var enabledEl = Demo.createElement("input", { type: "checkbox", checked: true }, function () {
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         listItemEl.appendChild(bitDepthEl);
         
         Demo.configurations.appendChild(listItemEl);
-    });
+    });*/
 
     var colorKey = Demo.addNode(new Envy.Nodes.ColorKeyTransformNode(), function (node) {
         node.setColorKey(132, 176, 214);
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         Demo.configurations.appendChild(listItemEl);
     });
 
-    Demo.addNode(new Envy.Nodes.ThresholdTransformNode(), function (node) {
+    /*Demo.addNode(new Envy.Nodes.ThresholdTransformNode(), function (node) {
         node.setLevel(100);
         
         var enabledEl = Demo.createElement("input", { type: "checkbox", checked: true }, function () {
@@ -99,6 +101,46 @@ document.addEventListener("DOMContentLoaded", function (event) {
         listItemEl.appendChild(enabledEl);
         
         Demo.configurations.appendChild(listItemEl);
+    });
+
+    Demo.addNode(new Envy.Nodes.AlphaToRGBTransformNode(), function (node) {
+        var enabledEl = Demo.createElement("input", { type: "checkbox", checked: true }, function () {
+            node.setPassThrough(!enabledEl.checked);
+        });
+
+        var listItemEl = document.createElement("li");
+        listItemEl.innerHTML = "<strong>Enable Alpha to RGB: </strong>";
+        listItemEl.appendChild(enabledEl);
+        
+        Demo.configurations.appendChild(listItemEl);
+    });*/
+    
+    Demo.addNode(new Envy.Nodes.BoxBlurTransformNode(), function (node) {
+        node.setLevel(3);
+        
+        var enabledEl = Demo.createElement("input", { type: "checkbox", checked: true }, function () {
+            node.setPassThrough(!enabledEl.checked);
+        });
+
+        var levelEl = Demo.createElement("input", { type: "number", min: 1, max: 10, value: 3 }, function () {
+            node.setLevel(levelEl.value);
+        });
+        
+        var listItemEl = document.createElement("li");
+        listItemEl.innerHTML = "<strong>Enable Box blur: </strong>";
+        listItemEl.appendChild(enabledEl);
+        listItemEl.appendChild(document.createTextNode("Level: "));
+        listItemEl.appendChild(levelEl);
+        
+        Demo.configurations.appendChild(listItemEl);
+    });
+    
+    var branchNode = Demo.flow.endBranch();
+
+    Demo.addNode(new Envy.Nodes.CopyChannelTransformNode(), function (node) {
+        node.setChannels("a");
+        node.setChannelOriginNode(branchNode);
+        //node.setPassThrough(true);
     });
 
     Demo.addNode(new Envy.Nodes.CanvasOutputNode(Demo.canvas));
