@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             node.setPassThrough(!enabledEl.checked);
         });
 
-        var levelEl = Demo.createElement("input", { type: "number", min: 1, max: 10, value: 3 }, function () {
+        var levelEl = Demo.createElement("input", { type: "number", min: 1, max: 40, value: 3 }, function () {
             node.setLevel(levelEl.value);
         });
         
