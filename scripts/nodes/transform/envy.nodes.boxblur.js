@@ -96,7 +96,7 @@
      * @returns {ImageData} Blurred image data
      */
     BoxBlurTransformNode.prototype._transform = function (sourceImageData) {
-        var channelWorkspace = new Uint32Array(sourceImageData.data.length),
+        var channelWorkspace = new Uint32Array(sourceImageData.data.length / 4),
             targetImageData = this._createImageData(sourceImageData),
             totalPixels = sourceImageData.data.length,
             height = sourceImageData.height,

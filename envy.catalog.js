@@ -27,6 +27,7 @@
     scriptLoader("scripts/nodes/transform/envy.nodes.channelbitdepth.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.alphatorgb.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.boxblur.js");
+    scriptLoader("scripts/nodes/transform/envy.nodes.softblur.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.copychannel.js");
     scriptLoader("scripts/nodes/output/envy.nodes.canvas.js");
 
