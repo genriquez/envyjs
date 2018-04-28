@@ -20,15 +20,19 @@
     scriptLoader("scripts/nodes/envy.imagenode.js");
     scriptLoader("scripts/nodes/input/envy.nodes.noise.js");
     scriptLoader("scripts/nodes/input/envy.nodes.image.js");
+    scriptLoader("scripts/nodes/input/envy.nodes.file.js");
     scriptLoader("scripts/nodes/transform/envy.transformnode.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.grayscale.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.threshold.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.colorkey.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.channelbitdepth.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.alphatorgb.js");
+    scriptLoader("scripts/nodes/transform/envy.nodes.rgbtoalpha.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.boxblur.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.softblur.js");
     scriptLoader("scripts/nodes/transform/envy.nodes.copychannel.js");
+    scriptLoader("scripts/nodes/transform/envy.nodes.invertcolor.js");
+    scriptLoader("scripts/nodes/transform/envy.nodes.fillcolor.js");
     scriptLoader("scripts/nodes/output/envy.nodes.canvas.js");
 
     scriptLoader("scripts/envy.editorflow.js");
