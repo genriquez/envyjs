@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ENVY - Node-based Image Editor</title>
+    <script src="envy.catalog.js"></script>
+    
+    <style>
+        canvas {
+            background: linear-gradient(45deg, #AAA 25%, transparent 25%), 
+                        linear-gradient(-45deg, #AAA 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #AAA 75%), 
+                        linear-gradient(-45deg, transparent 75%, #AAA 75%),
+                        #888;
+            
+          background-size: 20px 20px;
+          background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <p>   
+        <input id="imagePicker" type="file" />
+    </p>
+
+    <canvas id="canvas" width="100" height="100" style="width: 400px; height: 400px;"></canvas>
+
+    <ol id="nodeConfigurations"></ol>
+    <script src="demo-colorize.js"></script>
+</body>
+</html>
