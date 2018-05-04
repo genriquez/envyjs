@@ -30,8 +30,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     Demo.addNode(new Envy.Nodes.FileInputNode(Demo.imagePicker));
 
     Demo.addNode(new Envy.Nodes.InvertColorTransformNode(), function (node) {
-        node.setPassThrough(true);
-
         var enabledEl = Demo.createElement("input", { type: "checkbox", checked: false }, function () {
             node.setPassThrough(!enabledEl.checked);
         });
@@ -44,8 +42,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
     
     Demo.addNode(new Envy.Nodes.RGBToAlphaTransformNode(), function (node) {
-        node.setPassThrough(true);
-
         var enabledEl = Demo.createElement("input", { type: "checkbox", checked: false }, function () {
             node.setPassThrough(!enabledEl.checked);
         });
@@ -58,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
     
     Demo.addNode(new Envy.Nodes.FillColorTransformNode(), function (node) {
-        node.setColor(132, 176, 214);
+        node.setColor(238, 89, 110);
         
         var enabledEl = Demo.createElement("input", { type: "checkbox", checked: true }, function () {
             node.setPassThrough(!enabledEl.checked);
